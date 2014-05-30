@@ -9,9 +9,6 @@
 #   None
 #
 # Commands:
-#   wtf is this shit - responds with a random WITS image
-#   what the hell is this crap - responds with a random WITS image
-#   what the fuck is that poop - responds with a random WITS image
 #
 # Author:
 #   aaronbassett
