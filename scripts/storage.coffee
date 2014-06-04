@@ -1,7 +1,8 @@
 # Description:
 #   Inspect the data in redis easily
 #
-# Commands:
+
+# Hidden Commands:
 #   hubot show users - Display all users that hubot knows about
 #   hubot show storage - Display the contents that are persisted in the brain
 

@@ -1,8 +1,11 @@
 # Description:
-#   Utility commands surrounding Hubot uptime.
+#   ping hubot
 #
 # Commands:
-#   hubot ping - Reply with pong
+#   hubot ping - ping hubot
+#
+
+# Hidden Commands:
 #   hubot echo <text> - Reply back with <text>
 #   hubot time - Reply with current time
 #   hubot die - End hubot process
