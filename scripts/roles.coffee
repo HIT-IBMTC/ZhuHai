@@ -20,9 +20,9 @@ module.exports = (robot) ->
     "Be more specific, I know #{users.length} people named like that: #{(user.name for user in users).join(", ")}"
 
 
-  robot.respond /who [is|are]+ @?([\w .\-]+)\?*$/i, (msg) ->
+  robot.respond /who (is|are) @?([\w .\-]+)\?*$/i, (msg) ->
     joiner = ', '
-    name = msg.match[1].trim()
+    name = msg.match[2].trim()
 
     if name is robot.name or name is "you"
       msg.send "I'm tonyzhu's little brother."
