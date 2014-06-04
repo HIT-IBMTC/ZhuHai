@@ -7,7 +7,8 @@
 # Configuration:
 #   None
 #
-# Commands:
+
+# Hidden Commands:
 #   hubot pug me - Receive a pug
 #   hubot pug bomb N - get N pugs
 
