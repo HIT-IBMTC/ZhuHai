@@ -7,6 +7,10 @@
 # Notes:
 #   DON'T DELETE THIS SCRIPT! ALL ROBAWTS MUST KNOW THE RULES
 
+footooRules = [
+  "有事看书写代码 没事扫地烧开水"
+]
+
 rules = [
   "1. A robot may not injure a human being or, through inaction, allow a human being to come to harm.",
   "2. A robot must obey any orders given to it by human beings, except where such orders would conflict with the First Law.",
@@ -20,10 +24,11 @@ otherRules = [
   ]
 
 module.exports = (robot) ->
-  robot.respond /(what are )?the (three |3 )?(rules|laws)/i, (msg) ->
+  robot.respond /(what are )?the (three |3 )?(rule|rules|laws)/i, (msg) ->
     text = msg.message.text
     if text.match(/apple/i) or text.match(/dev/i)
       msg.send otherRules.join('\n')
     else
-      msg.send rules.join('\n')
+      #msg.send rules.join('\n')
+      msg.send footooRules.join('\n')
 
