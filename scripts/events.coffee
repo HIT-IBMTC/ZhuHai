@@ -1,7 +1,8 @@
 # Description:
 #   Event system related utilities
 #
-# Commands:
+
+# Hidden Commands:
 #   hubot fake event <event> - Triggers the <event> event for debugging reasons
 #
 # Events:
