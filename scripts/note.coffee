@@ -101,4 +101,4 @@ module.exports = (robot) ->
       history.clear()
       takingNote = false
     else
-      msg.send "I wasn't paying attention.."
+      msg.send "I wasn't paying attention.. Ask me to `take note` first, please!"
