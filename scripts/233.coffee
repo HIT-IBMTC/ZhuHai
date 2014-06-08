@@ -14,10 +14,10 @@
 #   aaronbassett
 
 imgs = [
-    "https://www.dropbox.com/s/um9wukrq484q35f/cto.jpg",
-    "https://www.dropbox.com/s/e4lynr3p124r5qt/df.jpg",
-    "https://www.dropbox.com/s/mp9unloe7f4grse/ctl.jpg",
-    "https://www.dropbox.com/s/wb8fzyjrapdplap/lz.jpg"
+  "http://ftzhuhai.qiniudn.com/cto.jpg",
+  "http://ftzhuhai.qiniudn.com/df.jpg",
+  "http://ftzhuhai.qiniudn.com/lz.jpg",
+  "http://ftzhuhai.qiniudn.com/ctl.jpg"
 ]
 
 module.exports = (robot) ->
