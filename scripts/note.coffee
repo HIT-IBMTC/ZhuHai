@@ -7,7 +7,8 @@
 #   None
 #
 # Configuration:
-#   SLACK_TOKEN  token used to create file at slack
+#   SLACK_TOKEN     token used to create file at slack
+#   GENERAL_CHANNEL channel to post the file
 #
 # Commands:
 #   hubot take note
@@ -28,9 +29,9 @@ class History
     @robot.brain.data.history = @cache
 
   summarize: ->
-    reply = "Here's my note:\n------------\n\n"
+    reply = "Note:\n------------\n"
     reply += @entryToString(message) + '\n' for message in @cache.slice(0, -1)
-    reply += "\n\n------------"
+    reply += "\n------------"
     return reply
 
   entryToString: (event) ->
@@ -63,7 +64,7 @@ module.exports = (robot) ->
       msg.send "I'm listening, keep going.."
     else
       msg.send "Taking my notebook out, and, ready to go!"
-      msg.send "<b>Use `summarize` command to make me stop</b>"
+      msg.send "Use `summarize` command to make me stop"
       takingNote = true
       history.clear()
 
@@ -86,17 +87,20 @@ module.exports = (robot) ->
       fields = {
         token: process.env.SLACK_TOKEN,
         filename: title,
-        content: summary,
-        initial_comment : "Note taken by ZhuHai on " + dateStr
+        initial_comment : "Note taken by ZhuHai on " + dateStr,
+        channels: process.env.GENERAL_CHANNEL
       }
 
       querystring = require("querystring")
-      msg.http(url).post(querystring.stringify(fields)) (err,response,body) ->
+      body = querystring.stringify(fields)
+      body += "&content=" + summary
+
+      msg.http(url + "?" + body).post("") (err,response,body) ->
         success = body["ok"]
         if success
           msg.send "Successfully uploaded note!"
         else
-          msg.send "Oops..Upload failed.."
+          msg.send "Oops..Upload failed.. " + body
 
       history.clear()
       takingNote = false
