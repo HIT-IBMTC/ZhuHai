@@ -96,11 +96,7 @@ module.exports = (robot) ->
       body += "&content=" + summary
 
       msg.http(url + "?" + body).post("") (err,response,body) ->
-        success = body["ok"]
-        if success
-          msg.send "Successfully uploaded note!"
-        else
-          msg.send "Oops..Upload failed.. " + body
+        msg.send "Your conversation log has been uploaded."
 
       history.clear()
       takingNote = false
