@@ -56,7 +56,6 @@ module.exports = (robot) ->
 
   robot.hear /([\s\S]*)/i, (msg) ->
     if takingNote
-      msg.send msg.match[1]
       historyentry = new HistoryEntry(msg.message.user.name, msg.match[1])
       history.add historyentry
 
