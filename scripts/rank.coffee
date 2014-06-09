@@ -26,9 +26,9 @@ module.exports = (robot) ->
       arr.push([name, score])
 
     arr.sort (a, b) ->
-      return if a[1] >= b[1] then 1 else -1
+      return if a[1] >= b[1] then -1 else 1
 
     rankMsg = "话痨排行榜:\n"
     for index, item of arr
-      rankMsg += "第" + (index + 1) + "名：" + item[0] + "，得分：" + item[1] + "\n"
+      rankMsg += "第" + parseInt(parseInt(index, 10) + 1, 10) + "名：" + item[0] + "，得分：" + item[1] + "\n"
     msg.send rankMsg
