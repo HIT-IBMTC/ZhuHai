@@ -24,7 +24,7 @@ module.exports = (robot) ->
     joiner = ', '
     name = msg.match[2].trim()
 
-    if name is robot.name or name is "you"
+    if name.toLowerCase() is robot.name.toLowerCase() or name.toLowerCase() is "you"
       msg.send "I'm tonyzhu's little brother."
     else
       users = robot.brain.usersForFuzzyName(name)
