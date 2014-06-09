@@ -17,7 +17,7 @@ flip = require 'flip'
 
 module.exports = (robot) ->
 
-  robot.respond /(rage )?flip( .*)?$/i, (msg) ->
+  robot.hear /(rage )?flip( .*)?$/i, (msg) ->
     if msg.match[1] == 'rage '
       guy = '(ノಠ益ಠ)ノ彡'
     else
