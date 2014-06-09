@@ -97,7 +97,7 @@ module.exports = (robot) ->
       voting.build(topic, choices)
 
       sponsor = robot.brain.usersForFuzzyName(msg.message.user['name'])[0].name
-      msg.send "@channel @#{sponsor}发起了一个投票，请使用`vote`来投票"
+      msg.send "@channel @#{sponsor}发起了一个投票，请使用 `vote` 来投票"
       voting.showChoices(msg)
       isVoting = true
 
@@ -126,7 +126,7 @@ module.exports = (robot) ->
     if !isVoting
       msg.send noVotingError
     else
-      msg.send "---------------投票结果---------------"
+      msg.send "@channel\n---------------投票结果---------------"
       voting.showResult(msg)
       voting.end()
       isVoting = false
