@@ -6,6 +6,7 @@
 #
 # Configuration:
 #   SIMSIMI_KEY     token with SimSimi
+#   SIMSIMI_FT      ft argument for SimSimi
 #
 # Commands:
 #   hubot chat - And chat with zhuhai
@@ -21,12 +22,15 @@ module.exports = (robot) ->
       key  : process.env.SIMSIMI_KEY,
       text : msg.match[1],
       lc   : "ch",
-      ft   : 0.5
+      ft   : process.env.SIMSIMI_FT
     }
 
     querystring = require("querystring")
     body = querystring.stringify(fields)
 
     msg.http(url + "?" + body).get() (err,response,body) ->
-      content = JSON.parse(body)
-      msg.send content.response
+      if body
+        content = JSON.parse(body)
+        msg.send content.response
+      else
+        msg.send "今天累了捏，睡觉去了哟～"
