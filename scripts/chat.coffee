@@ -20,7 +20,8 @@ module.exports = (robot) ->
     fields = {
       key  : process.env.SIMSIMI_KEY,
       text : msg.match[1],
-      lc   : "ch"
+      lc   : "ch",
+      ft   : 0.5
     }
 
     querystring = require("querystring")
