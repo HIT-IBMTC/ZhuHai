@@ -55,7 +55,7 @@ class Voting
 
   vote: (msg, voter, votes) ->
     if !@validVotes(votes)
-      msg.reply "无效的投票!"
+      msg.reply "你在逗我吗？没有这个选项！"
     else
       response = "投给了选项 "
       for vote, i in votes
@@ -126,7 +126,7 @@ module.exports = (robot) ->
     if !isVoting
       msg.send noVotingError
     else
-      msg.send "@channel\n---------------投票结果---------------"
+      msg.send "@channel\n------------------------------投票结果------------------------------"
       voting.showResult(msg)
       voting.end()
       isVoting = false
