@@ -19,6 +19,7 @@ DAY = 1000 * 60 * 60  * 24
 
 module.exports = (robot) ->
   robot.respond /bangumi(\s*.*)/i, (msg) ->
+    msg.send "正在获取数据～"
     msg.http(process.env.BANGUMI_RSS_URL).get() (err, response, body)->
       parseString body, (err, result) ->
         now = new Date()
