@@ -8,7 +8,7 @@
 #   BANGUMI_RSS_URL : url of bangumi rss feed, currently use bilibili's feed
 #
 # Commands:
-#   hubot bangumi - Baugumi of today
+#   hubot bangumi <count> - Baugumi of today (with max item of count)
 #
 # Author:
 #   Void Main
@@ -18,17 +18,24 @@
 DAY = 1000 * 60 * 60  * 24
 
 module.exports = (robot) ->
-  robot.respond /bangumi/i, (msg) ->
+  robot.respond /bangumi(\s*.*)/i, (msg) ->
     msg.http(process.env.BANGUMI_RSS_URL).get() (err, response, body)->
       parseString body, (err, result) ->
         now = new Date()
-        has_bangumi = false
-        for item in result.rss.channel[0].item
-          date = new Date(item.pubDate)
-          days_passed = Math.round((now.getTime() - date.getTime()) / DAY)
-          if days_passed < 1
-            has_bangumi = true
-            msg.send "[#{item.category}] " + item.title + " - (#{item.author})\n" + item.description + "\n" + item.pubDate + "\n" + item.link
+        bangumi_info = ""
+        max = msg.match[1]
+        max = parseInt(max, 10)
+        if isNaN(max)
+          max = 0
 
-        if not has_bangumi
+        for item, index in result.rss.channel[0].item
+          if max == 0 || index < max
+            date = new Date(item.pubDate)
+            days_passed = Math.round((now.getTime() - date.getTime()) / DAY)
+            if days_passed < 1
+              bangumi_info += "[#{item.category}] " + item.title + " - (#{item.author})\n" + item.description + "\n" + item.pubDate + "\n" + item.link + "\n"
+
+        if not bangumi_info.length
           msg.send "今天木有更新耶～"
+        else
+          msg.send bangumi_info
