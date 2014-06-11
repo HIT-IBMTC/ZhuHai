@@ -31,6 +31,6 @@ module.exports = (robot) ->
     msg.http(url + "?" + body).get() (err,response,body) ->
       content = JSON.parse(body)
       if content.result != 509
-        msg.send content.response
+        msg.reply content.response
       else
-        msg.send "今天累了捏，睡觉去了哟，客官请明天再来～"
+        msg.reply "今天累了捏，睡觉去了哟，客官请明天再来～"
