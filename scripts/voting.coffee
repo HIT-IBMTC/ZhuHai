@@ -24,18 +24,22 @@ class Voting
   constructor: (@robot) ->
     @topic = ""
     @choices = []
+    @isVoting = false
     @robot.brain.on "loaded", =>
       if @robot.brain.data.voting?
         @robot.logger.info "loading votes"
         @topic = @robot.brain.data.voting.topic
         @choices = @robot.brain.data.voting.choices
+        @isVoting = @robot.brain.data.voting.isVoting
       else
         @robot.logger.info "newing votes"
         @robot.brain.data.voting = {}
+        @robot.brain.data.voting.isVoting = @isVoting
 
   build: (@topic, @choices) ->
     @robot.brain.data.voting.topic = @topic
     @robot.brain.data.voting.choices = @choices
+    @robot.brain.data.voting.isVoting = @isVoting = true
 
   showChoices: (msg, showResult = no, result = null) ->
     response = ""
@@ -76,16 +80,16 @@ class Voting
   end: () ->
     delete @robot.brain.data.voting.topic
     delete @robot.brain.data.voting.choices
+    @robot.brain.data.voting.isVoting = @isVoting = false
 
 
 module.exports = (robot) ->
-  isVoting = false
   noVotingError = "( ⊙ o ⊙ )没有正在进行中的投票"
 
   voting = new Voting(robot)
 
   robot.respond /start vote (.+)(:|：)(.+)/i, (msg) ->
-    if isVoting
+    if voting.isVoting
       msg.send "某个投票正在进行中..."
     else
       topic = msg.match[1].trim()
@@ -99,10 +103,9 @@ module.exports = (robot) ->
       sponsor = robot.brain.usersForFuzzyName(msg.message.user['name'])[0].name
       msg.send "@channel @#{sponsor}发起了一个投票，请使用 `vote` 来投票"
       voting.showChoices(msg)
-      isVoting = true
 
   robot.respond /vote ([\d ,]+)/i, (msg) ->
-    if !isVoting
+    if !voting.isVoting
       msg.send noVotingError
     else
       tmp = msg.match[1].split(',')
@@ -111,25 +114,24 @@ module.exports = (robot) ->
       voting.vote(msg, voter, votes)
 
   robot.respond /show (choice|choices)/i, (msg) ->
-    if !isVoting
+    if !voting.isVoting
       msg.send noVotingError
     else
       voting.showChoices(msg)
 
   robot.respond /show (vote|votes)/i, (msg) ->
-    if !isVoting
+    if !voting.isVoting
       msg.send noVotingError
     else
       voting.showResult(msg)
 
   robot.respond /end vote/i, (msg) ->
-    if !isVoting
+    if !voting.isVoting
       msg.send noVotingError
     else
       msg.send "@channel\n------------------------------投票结果------------------------------"
       voting.showResult(msg)
       voting.end()
-      isVoting = false
 
 
 
