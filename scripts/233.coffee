@@ -11,13 +11,19 @@
 #   hubot 233 - 2333333333
 #
 # Author:
-#   aaronbassett
+#   Dyul
 
 imgs = [
-  "http://ftzhuhai.qiniudn.com/cto.jpg",
-  "http://ftzhuhai.qiniudn.com/df.jpg",
-  "http://ftzhuhai.qiniudn.com/lz.jpg",
-  "http://ftzhuhai.qiniudn.com/ctl.jpg"
+  "http://footoozhuhai.qiniudn.com/yen.jpg",
+  "http://footoozhuhai.qiniudn.com/dofy.jpg",
+  "http://footoozhuhai.qiniudn.com/qiu.jpg",
+  "http://footoozhuhai.qiniudn.com/huan.png",
+  "http://footoozhuhai.qiniudn.com/doublekill.png",
+  "http://footoozhuhai.qiniudn.com/zlb.jpg",
+  "http://footoozhuhai.qiniudn.com/doublelong.png",
+  "http://footoozhuhai.qiniudn.com/lzinred.png",
+  "http://footoozhuhai.qiniudn.com/shuaishuai.png",
+  "http://footoozhuhai.qiniudn.com/sobighuan.png",
 ]
 
 module.exports = (robot) ->
