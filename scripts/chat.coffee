@@ -28,9 +28,13 @@ module.exports = (robot) ->
     querystring = require("querystring")
     body = querystring.stringify(fields)
 
-    msg.http(url + "?" + body).get() (err,response,body) ->
+    msg.http("#{url}?#{body}").get() (err,response,body) ->
       content = JSON.parse(body)
-      if content.result != 509
+      if content.result is 200
         msg.reply content.response
-      else
+      else if content.result is 401
+        msg.reply "我是一个有自闭症的小朋友，不见钱不嘴开呀！\n(ノಠ益ಠ)ノ彡 ʞʃɐʇ ou 'ʎǝuoɯ ou"
+      else if content.result is 509
         msg.reply "今天累了捏，睡觉去了哟，客官请明天再来～"
+      else
+        msg.reply "我好像出问题了：#{content.result}"
