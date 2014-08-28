@@ -22,12 +22,15 @@
  * Dyul: 用户名也作为种子
  */
 
-username = "Cliff hasn't given me a name yet!!"
+var username = "Cliff hasn't given me a name yet!!"
+
+function setUsername(usrnm){
+  username = usrnm + " at FoOTOo";
+}
 
 function random(dayseed, indexseed) {
 	var n = dayseed % 23333;
 
-  username += " at FoOTOo"
   for(var i = 0; i < username.length; i++) {
     n = n + username.charCodeAt(i);
   }
@@ -241,25 +244,27 @@ function addToBad(event) {
 `
 
 module.exports = (robot) ->
-  robot.respond /huangli(.*)/i, (msg) ->
-    getHuangli msg
+  robot.respond /huangli(.*)/i,  (msg) ->
+    getHuangli robot, msg
 
-getHuangli = (msg) ->
-  username = msg.message.user['name']
+getHuangli = (robot, msg) ->
+  user = robot.brain.usersForFuzzyName(msg.message.user['name'])[0].name
+  setUsername(user)
 
-  hl = "\n---今日运势---\n"
-  hl += getTodayString() + "\n\n"
+  hl = "\n*---#{user}的今日运势---*\n"
+  hl += "*#{getTodayString()}*\n\n"
 
   pickTodaysLuck()
   hl += "*宜*\n"
   for gd in good
-    hl += "\t#{gd.name}\t\t#{gd.description}\n"
+    hl += "\t#{gd.name}\t\t _#{gd.description}_ \n"
   hl += "*不宜*\n"
   for bd in bad
-    hl += "\t#{bd.name}\t\t#{bd.description}\n"
+    hl += "\t#{bd.name}\t\t _#{bd.description}_ \n"
   hl += "\n"
 
-  hl += "*座位朝向：*面向#{directions[random(iday, 2) % directions.length]}写程序，BUG最少\n"
-  hl += "*今日宜饮：*#{pickRandom(drinks,2).join('，')}\n"
-  hl += "*女神亲近指数：*#{star(random(iday, 6) % 5 + 1)}\n"
-  msg.reply hl
+  hl += "*座位朝向：* 面向 *#{directions[random(iday, 2) % directions.length]}* 写程序，BUG最少\n"
+  hl += "*今日宜饮：* #{pickRandom(drinks,2).join('，')}\n"
+  hl += "*妹子亲近指数：* #{star(random(iday, 6) % 5 + 1)}\n"
+
+  msg.send hl
