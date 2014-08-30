@@ -96,7 +96,7 @@ var floors = ["4", "6"];
 
 
 function getTodayString() {
-	return "今天是" + today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日 星期" + weeks[today.getDay()];
+	return "今天是" + today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日 星期" + weeks[today.getDay()] + " " + today.getHours() + ":" + today.getMinutes();
 }
 
 function star(num) {
