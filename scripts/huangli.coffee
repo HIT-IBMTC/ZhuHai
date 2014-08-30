@@ -46,7 +46,8 @@ var localTime = d.getTime();
 var localOffset = d.getTimezoneOffset() * 60 * 1000;
 var utc = localTime + localOffset;
 var offset = 8;
-var today = new Date(utc + 60*60*1000*offset);
+var today = new Date()
+today.settime(utc + 60*60*1000*offset);
 var iday = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
 
 var weeks = ["日","一","二","三","四","五","六"];
