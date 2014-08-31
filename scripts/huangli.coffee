@@ -42,12 +42,7 @@ function random(dayseed, indexseed) {
 }
 
 var d = new Date();
-var localTime = d.getTime();
-var localOffset = d.getTimezoneOffset() * 60 * 1000;
-var utc = localTime + localOffset;
-var offset = 8;
-var today = new Date(utc + 60*60*1000*offset);
-var iday = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+var iday;
 
 var weeks = ["日","一","二","三","四","五","六"];
 var directions = ["北方","东北方","东方","东南方","南方","西南方","西方","西北方"];
@@ -96,6 +91,12 @@ var floors = ["4", "6"];
 
 
 function getTodayString() {
+	var localTime = d.getTime();
+	var localOffset = d.getTimezoneOffset() * 60 * 1000;
+	var utc = localTime + localOffset;
+	var offset = 8;
+	var today = new Date(utc + 60*60*1000*offset);
+	iday = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
 	return "今天是" + today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日 星期" + weeks[today.getDay()] + " " + today.getHours() + ":" + today.getMinutes();
 }
 
