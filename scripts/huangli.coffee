@@ -41,7 +41,6 @@ function random(dayseed, indexseed) {
 	return n;
 }
 
-var d = new Date();
 var iday;
 
 var weeks = ["日","一","二","三","四","五","六"];
@@ -91,6 +90,7 @@ var floors = ["4", "6"];
 
 
 function getTodayString() {
+	var d = new Date();
 	var localTime = d.getTime();
 	var localOffset = d.getTimezoneOffset() * 60 * 1000;
 	var utc = localTime + localOffset;
