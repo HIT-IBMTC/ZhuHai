@@ -30,7 +30,7 @@ module.exports = (robot) ->
 
     msg.http("#{url}?#{body}").get() (err,response,body) ->
       content = JSON.parse(body)
-      if content.result is 200
+      if content.result is 100
         msg.reply content.response
       else if content.result is 401
         msg.reply "我是一个有自闭症的小朋友，不见钱不嘴开呀！\n(ノಠ益ಠ)ノ彡 ʞʃɐʇ ou 'ʎǝuoɯ ou"
